@@ -1,0 +1,175 @@
+version: '3.8'
+
+services:
+  # --------------------------------------------------------------------------
+  # PostgreSQL Database
+  # --------------------------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: agentos-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-agentos}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-agentos_secure_password_change_in_production}
+      POSTGRES_DB: ${POSTGRES_DB:-agentos}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-agentos} -d ${POSTGRES_DB:-agentos}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - agentos-network
+
+  # --------------------------------------------------------------------------
+  # Redis (for BullMQ queues, caching, sessions)
+  # --------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: agentos-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    networks:
+      - agentos-network
+
+  # --------------------------------------------------------------------------
+  # AgentOS Application
+  # --------------------------------------------------------------------------
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agentos-app
+    restart: unless-stopped
+    environment:
+      # Application
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+      - PORT=3000
+      
+      # Database
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-agentos}:${POSTGRES_PASSWORD:-agentos_secure_password_change_in_production}@postgres:5432/${POSTGRES_DB:-agentos}?schema=public
+      
+      # Redis
+      - REDIS_URL=redis://redis:6379
+      
+      # Authentication
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+      
+      # OAuth (optional - uncomment and configure as needed)
+      # - GITHUB_ID=${GITHUB_ID}
+      # - GITHUB_SECRET=${GITHUB_SECRET}
+      # - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      # - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      
+      # Encryption (for provider credentials)
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+      
+      # Optional: Email (for invitations, password reset)
+      # - EMAIL_SERVER_HOST=${EMAIL_SERVER_HOST}
+      # - EMAIL_SERVER_PORT=${EMAIL_SERVER_PORT}
+      # - EMAIL_SERVER_USER=${EMAIL_SERVER_USER}
+      # - EMAIL_SERVER_PASSWORD=${EMAIL_SERVER_PASSWORD}
+      # - EMAIL_FROM=${EMAIL_FROM}
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - agentos-network
+    # Resource limits for production
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    # Graceful shutdown
+    stop_grace_period: 30s
+
+  # --------------------------------------------------------------------------
+  # Queue Worker (for background jobs)
+  # --------------------------------------------------------------------------
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agentos-worker
+    restart: unless-stopped
+    command: node -e "require('@/lib/queue/worker')" || npm run queue:worker
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-agentos}:${POSTGRES_PASSWORD:-agentos_secure_password_change_in_production}@postgres:5432/${POSTGRES_DB:-agentos}?schema=public
+      - REDIS_URL=redis://redis:6379
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - agentos-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  # --------------------------------------------------------------------------
+  # Nginx Reverse Proxy (optional - for production with SSL)
+  # --------------------------------------------------------------------------
+  # nginx:
+  #   image: nginx:alpine
+  #   container_name: agentos-nginx
+  #   restart: unless-stopped
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf:ro
+  #     - ./certbot/conf:/etc/letsencrypt:ro
+  #     - ./certbot/www:/var/www/certbot:ro
+  #   depends_on:
+  #     - app
+  #   networks:
+  #     - agentos-network
+
+# ----------------------------------------------------------------------------
+# Networks
+# ----------------------------------------------------------------------------
+networks:
+  agentos-network:
+    driver: bridge
+
+# ----------------------------------------------------------------------------
+# Volumes
+# ----------------------------------------------------------------------------
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
