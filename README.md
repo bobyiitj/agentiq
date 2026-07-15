@@ -666,7 +666,7 @@ Each run records `promptTokens` and `completionTokens`, then uses the model's `i
 ```
 MIT License
 
-Copyright (c) 2024 AgentOS Contributors
+Copyright (c) 2026 agentiq Contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
