@@ -1,23 +1,19 @@
 <p align="center">
-  <img alt="AgentOS" src="assets/logo.svg" width="320">
-</p>
-
-<p align="center">
   <strong>Open-source AI mission control.</strong> Run prompts against multiple LLM providers, compare outputs side-by-side, track costs, and manage your entire AI stack from one dashboard.
 </p>
 
 <p align="center">
   <a href="#getting-started"><img src="https://img.shields.io/badge/Get%20Started-000?style=for-the-badge&logo=rocket&logoColor=white" alt="Get Started"></a>
   <a href="#docker"><img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"></a>
-  <a href="https://github.com/your-org/agentos/releases"><img src="https://img.shields.io/badge/Release-v0.1.0-000?style=for-the-badge&logo=github&logoColor=white" alt="Release"></a>
-  <a href="https://github.com/your-org/agentos/issues/new"><img src="https://img.shields.io/badge/Report%20Issue-000?style=for-the-badge&logo=github&logoColor=white" alt="Report Issue"></a>
+  <a href="https://github.com/bobyiitj/agentiq/releases"><img src="https://img.shields.io/badge/Release-v0.1.0-000?style=for-the-badge&logo=github&logoColor=white" alt="Release"></a>
+  <a href="https://github.com/bobyiitj/agentiq/issues/new"><img src="https://img.shields.io/badge/Report%20Issue-000?style=for-the-badge&logo=github&logoColor=white" alt="Report Issue"></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/your-org/agentos/stargazers"><img src="https://img.shields.io/github/stars/your-org/agentos?style=flat&color=ffcb47&logo=star" alt="Stars"></a>
-  <a href="https://github.com/your-org/agentos/network/members"><img src="https://img.shields.io/github/forks/your-org/agentos?style=flat&color=8ae8a5&logo=fork" alt="Forks"></a>
-  <a href="https://github.com/your-org/agentos/issues"><img src="https://img.shields.io/github/issues/your-org/agentos?style=flat&color=ff6b6b&logo=issue" alt="Issues"></a>
-  <a href="https://github.com/your-org/agentos/blob/main/LICENSE"><img src="https://img.shields.io/github/license/your-org/agentos?style=flat&color=00d4aa&logo=license" alt="License"></a>
+  <a href="https://github.com/bobyiitj/agentiq/stargazers"><img src="https://img.shields.io/github/stars/bobyiitj/agentiq?style=flat&color=ffcb47&logo=star" alt="Stars"></a>
+  <a href="https://github.com/bobyiitj/agentiq/network/members"><img src="https://img.shields.io/github/forks/bobyiitj/agentiq?style=flat&color=8ae8a5&logo=fork" alt="Forks"></a>
+  <a href="https://github.com/bobyiitj/agentiq/issues"><img src="https://img.shields.io/github/issues/bobyiitj/agentiq?style=flat&color=ff6b6b&logo=issue" alt="Issues"></a>
+  <a href="https://github.com/bobyiitj/agentiq/blob/main/LICENSE"><img src="https://img.shields.io/github/license/bobyiitj/agentiq?style=flat&color=00d4aa&logo=license" alt="License"></a>
 </p>
 
 ---
@@ -32,6 +28,14 @@
   <em>Side-by-side model comparison with real-time streaming, token counting, and cost tracking</em>
 </p>
 
+## Dashboard
+
+<p align="center">
+  <img src="assets/dashboard.png" alt="AgentOS Dashboard" width="100%">
+  <br>
+  <em>Mission Control — cost trends, run breakdowns, provider health, usage analytics</em>
+</p>
+
 ---
 
 ## Table of Contents
@@ -40,6 +44,7 @@
 - [Core Features](#core-features)
 - [Architecture](#architecture)
 - [Supported Providers](#supported-providers)
+- [Dashboard](#dashboard)
 - [Mission Control Dashboard](#mission-control-dashboard)
 - [Agent Builder](#agent-builder)
 - [Chat Interface](#chat-interface)
@@ -326,7 +331,7 @@ Select 2-5 (provider, model) pairs and run the same prompt against all of them:
 ### 1. Clone and Install
 
 ```bash
-git clone https://github.com/your-org/agentos.git
+git clone https://github.com/bobyiitj/agentiq.git
 cd agentos
 npm install
 ```
@@ -584,7 +589,7 @@ We welcome contributions!
 
 ```bash
 # Fork and clone
-git clone https://github.com/your-username/agentos.git
+git clone https://github.com/bobyiitj/agentiq.git
 
 # Create feature branch
 git checkout -b feat/amazing-feature
@@ -666,7 +671,7 @@ Each run records `promptTokens` and `completionTokens`, then uses the model's `i
 ```
 MIT License
 
-Copyright (c) 2024 AgentOS Contributors
+Copyright (c) 2026 AgentOS
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
