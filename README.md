@@ -20,14 +20,11 @@
 
 ## Demo
 
-https://github.com/user-attachments/assets/7594f2dd-cdce-4b86-971f-a2b13b89c03c
-
 <p align="center">
-  <video src="assets/demo.mp4" controls width="100%">
+  <video src="https://github.com/user-attachments/assets/7594f2dd-cdce-4b86-971f-a2b13b89c03c" controls width="100%">
     Your browser does not support the video tag.
   </video>
   <br>
-  <em>Side-by-side model comparison with real-time streaming, token counting, and cost tracking</em>
 </p>
 
 ## Dashboard
