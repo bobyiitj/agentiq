@@ -654,7 +654,7 @@ Each run records `promptTokens` and `completionTokens`, then uses the model's `i
 
 ## License
 
-**MIT License** — free for personal and commercial use.
+**MIT License**
 
 ```
 MIT License
