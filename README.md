@@ -383,8 +383,6 @@ npm run dev
 | `RATE_LIMIT_CHAT_MAX` | Optional | Chat requests per window (default: 30) |
 | `RATE_LIMIT_CHAT_WINDOW_MS` | Optional | Chat window ms (default: 60000) |
 
-> Never commit `.env` — it's in `.gitignore`. Use `.env.example` as template.
-
 ---
 
 ## Docker
