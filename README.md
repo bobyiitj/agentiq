@@ -18,21 +18,12 @@
 
 ---
 
-## Demo
-
-<p align="center">
-  <video src="https://github.com/user-attachments/assets/7594f2dd-cdce-4b86-971f-a2b13b89c03c" controls width="100%">
-    Your browser does not support the video tag.
-  </video>
-  <br>
-</p>
-
 ## Dashboard
 
 <p align="center">
   <img src="assets/dashboard.png" alt="AgentOS Dashboard" width="100%">
   <br>
-  <em>Mission Control — cost trends, run breakdowns, provider health, usage analytics</em>
+  <em>Mission Control-cost trends, run breakdowns, provider health, usage analytics</em>
 </p>
 
 ---
@@ -695,9 +686,9 @@ SOFTWARE.
 
 <p align="center">
   Built with care by the AgentOS community.<br>
-  <strong>Star the repo</strong> if you find it useful — it helps more developers discover the project.
+  <strong>Star the repo</strong> if you find it useful-it helps more developers discover the project.
 </p>
 
 <p align="center">
-  <sub>AgentOS v0.1.0 - MIT License</sub>
+  <sub>AgentOS v0.1.0-MIT License</sub>
 </p>
