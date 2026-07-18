@@ -1,4 +1,8 @@
 <p align="center">
+  <img alt="AgentOS" src="assets/agentos.png" width="320">
+</p>
+
+<p align="center">
   <strong>Open-source AI mission control.</strong> Run prompts against multiple LLM providers, compare outputs side-by-side, track costs, and manage your entire AI stack from one dashboard.
 </p>
 
