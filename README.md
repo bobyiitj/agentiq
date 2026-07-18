@@ -22,22 +22,12 @@
 
 ---
 
-## Demo
-
-<p align="center">
-  <video src="assets/demo.mp4" controls width="100%">
-    Your browser does not support the video tag.
-  </video>
-  <br>
-  <em>Side-by-side model comparison with real-time streaming, token counting, and cost tracking</em>
-</p>
-
 ## Dashboard
 
 <p align="center">
   <img src="assets/dashboard.png" alt="AgentOS Dashboard" width="100%">
   <br>
-  <em>Mission Control — cost trends, run breakdowns, provider health, usage analytics</em>
+  <em>Mission Control-cost trends, run breakdowns, provider health, usage analytics</em>
 </p>
 
 ---
@@ -397,8 +387,6 @@ npm run dev
 | `RATE_LIMIT_CHAT_MAX` | Optional | Chat requests per window (default: 30) |
 | `RATE_LIMIT_CHAT_WINDOW_MS` | Optional | Chat window ms (default: 60000) |
 
-> Never commit `.env` — it's in `.gitignore`. Use `.env.example` as template.
-
 ---
 
 ## Docker
@@ -670,7 +658,7 @@ Each run records `promptTokens` and `completionTokens`, then uses the model's `i
 
 ## License
 
-**MIT License** — free for personal and commercial use.
+**MIT License**
 
 ```
 MIT License
@@ -700,9 +688,9 @@ SOFTWARE.
 
 <p align="center">
   Built with care by the AgentOS community.<br>
-  <strong>Star the repo</strong> if you find it useful — it helps more developers discover the project.
+  <strong>Star the repo</strong> if you find it useful-it helps more developers discover the project.
 </p>
 
 <p align="center">
-  <sub>AgentOS v0.1.0 - MIT License</sub>
+  <sub>AgentOS v0.1.0-MIT License</sub>
 </p>
